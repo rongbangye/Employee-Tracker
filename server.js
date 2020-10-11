@@ -152,7 +152,7 @@ function updateEmployeeRole() {
   inquirer
     .prompt([
       {
-        message: "which employee would you like to update?",
+        message: "Enter employee's first name that you would like to update?",
         type: "input",
         name: "name",
       },
@@ -164,11 +164,11 @@ function updateEmployeeRole() {
     ])
     .then(function (answer) {
       connection.query(
-        "UPDATE employee SET role_id = ? WHERE first_name",
+        "UPDATE employee SET role_id = ? WHERE first_name = ?",
         [answer.role_id, answer.name],
         function (err, data) {
           if (err) throw err;
-          console.table(data);
+          console.log(`You have successfully update ${answer.name}'s role`);
           mainPrompt();
         }
       );
